@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성가대 연습 영상</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .screen { display: none; min-height: 100vh; padding: 24px 16px; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .back-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 4px 8px;
+      color: #555;
+    }
+    h1 { font-size: 22px; font-weight: 700; }
+    h2 { font-size: 18px; font-weight: 600; }
+
+    /* ── Main Screen ── */
+    #screen-main {
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .main-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+      color: #1a3a6b;
+    }
+    .main-subtitle {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .main-btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .main-btn:active { transform: scale(0.97); }
+    .main-btn-primary {
+      background: #1a3a6b;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(26,58,107,0.25);
+    }
+    .main-btn-secondary {
+      background: #fff;
+      color: #1a3a6b;
+      border: 2px solid #1a3a6b;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* ── Form (Input Screen) ── */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="url"] {
+      width: 100%;
+      padding: 14px 12px;
+      font-size: 16px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: #1a3a6b; }
+
+    .pat-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .pat-row input { flex: 1; }
+    .pat-save-btn {
+      padding: 14px 16px;
+      background: #1a3a6b;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .pat-status {
+      font-size: 12px;
+      margin-top: 4px;
+      color: #888;
+    }
+    .pat-status.ok { color: #2d7d46; }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 24px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e0e8f5;
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 18px;
+      margin-top: 24px;
+      font-size: 17px;
+      font-weight: 700;
+      background: #1a3a6b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status-msg {
+      margin-top: 12px;
+      font-size: 14px;
+      text-align: center;
+      min-height: 20px;
+      color: #555;
+    }
+    .status-msg.error { color: #c0392b; }
+    .status-msg.success { color: #2d7d46; }
+
+    /* ── View Screen ── */
+    .week-select-wrap {
+      margin-bottom: 20px;
+    }
+    select {
+      width: 100%;
+      padding: 14px 12px;
+      font-size: 16px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    .song-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 16px;
+      background: #fff;
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .link-card:active { transform: scale(0.98); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+    .link-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .icon-choir   { background: #e8f0fe; }
+    .icon-soprano { background: #fce8f3; }
+    .icon-alto    { background: #fef3e8; }
+    .icon-tenor   { background: #e8f5e9; }
+    .icon-bass    { background: #ede7f6; }
+
+    .link-info { flex: 1; }
+    .link-part { font-size: 17px; font-weight: 700; }
+    .link-sub  { font-size: 12px; color: #888; margin-top: 2px; }
+
+    .link-arrow { font-size: 20px; color: #bbb; }
+
+    .no-data {
+      text-align: center;
+      color: #aaa;
+      font-size: 15px;
+      margin-top: 40px;
+    }
+
+    .copy-btn {
+      width: 100%;
+      padding: 16px;
+      margin-top: 32px;
+      font-size: 16px;
+      font-weight: 600;
+      background: #fff;
+      color: #1a3a6b;
+      border: 2px solid #1a3a6b;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .copy-btn.copied {
+      background: #2d7d46;
+      color: #fff;
+      border-color: #2d7d46;
+    }
+
+    .loading {
+      text-align: center;
+      color: #888;
+      margin-top: 60px;
+      font-size: 15px;
+    }
+
+    /* ── Scrollable content ── */
+    .scroll-content { flex: 1; overflow-y: auto; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ MAIN SCREEN ════════════════════════════════ -->
+<section id="screen-main" class="screen">
+  <p class="main-title">✝ 성가대 연습 영상</p>
+  <p class="main-subtitle">주차별 파트 연습 영상 링크 모음</p>
+  <button class="main-btn main-btn-secondary" onclick="navigate('view')">🎵 연습 영상 보기</button>
+  <button class="main-btn main-btn-primary" style="margin-top:12px" onclick="navigate('input')">✏️ 링크 입력 (관리자)</button>
+</section>
+
+<!-- ════════════════════════════════ INPUT SCREEN ════════════════════════════════ -->
+<section id="screen-input" class="screen">
+  <div class="header">
+    <button class="back-btn" onclick="navigate('main')">←</button>
+    <h1>링크 입력</h1>
+  </div>
+
+  <div class="scroll-content">
+    <!-- PAT -->
+    <div class="section-title">GitHub 인증</div>
+    <div class="form-group">
+      <label>Personal Access Token (PAT)</label>
+      <div class="pat-row">
+        <input type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxx" />
+        <button class="pat-save-btn" onclick="savePat()">저장</button>
+      </div>
+      <p class="pat-status" id="pat-status"></p>
+    </div>
+
+    <!-- Week & Song -->
+    <div class="section-title">주차 정보</div>
+    <div class="form-group">
+      <label>주차 번호</label>
+      <input type="number" id="input-week" placeholder="예: 1" min="1" />
+    </div>
+    <div class="form-group">
+      <label>곡 이름</label>
+      <input type="text" id="input-song" placeholder="예: Amazing Grace" />
+    </div>
+
+    <!-- YouTube Links -->
+    <div class="section-title">유튜브 링크</div>
+    <div class="form-group">
+      <label>🎼 합창 (Choir)</label>
+      <input type="url" id="link-choir" placeholder="https://youtube.com/..." />
+    </div>
+    <div class="form-group">
+      <label>🌸 소프라노 (Soprano)</label>
+      <input type="url" id="link-soprano" placeholder="https://youtube.com/..." />
+    </div>
+    <div class="form-group">
+      <label>🌿 알토 (Alto)</label>
+      <input type="url" id="link-alto" placeholder="https://youtube.com/..." />
+    </div>
+    <div class="form-group">
+      <label>🌱 테너 (Tenor)</label>
+      <input type="url" id="link-tenor" placeholder="https://youtube.com/..." />
+    </div>
+    <div class="form-group">
+      <label>🟣 베이스 (Bass)</label>
+      <input type="url" id="link-bass" placeholder="https://youtube.com/..." />
+    </div>
+
+    <button class="save-btn" id="save-btn" onclick="handleSave()">저장하기</button>
+    <p class="status-msg" id="save-status"></p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ VIEW SCREEN ════════════════════════════════ -->
+<section id="screen-view" class="screen">
+  <div class="header">
+    <button class="back-btn" onclick="navigate('main')">←</button>
+    <h1>연습 영상</h1>
+  </div>
+
+  <div class="week-select-wrap">
+    <select id="week-select" onchange="onWeekChange(this.value)"></select>
+  </div>
+
+  <div class="scroll-content">
+    <div id="view-content">
+      <p class="loading">불러오는 중...</p>
+    </div>
+    <button class="copy-btn" id="copy-btn" onclick="copyShareUrl()">🔗 이 페이지 링크 복사</button>
+  </div>
+</section>
+
+<script>
+  // ══════════════════════════════════════════════════
+  //  Constants
+  // ══════════════════════════════════════════════════
+  const REPO_OWNER = 'warabica';
+  const REPO_NAME  = 'choir';
+  const DATA_PATH  = 'data/weeks.json';
+  const RAW_URL    = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${DATA_PATH}`;
+  const API_URL    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`;
+  const PAGES_BASE = `https://${REPO_OWNER}.github.io/${REPO_NAME}/`;
+
+  const PARTS = [
+    { key: 'choir',   label: '합창',    sub: 'Choir',   icon: '🎼', cls: 'icon-choir'   },
+    { key: 'soprano', label: '소프라노', sub: 'Soprano', icon: '🌸', cls: 'icon-soprano' },
+    { key: 'alto',    label: '알토',    sub: 'Alto',    icon: '🌿', cls: 'icon-alto'    },
+    { key: 'tenor',   label: '테너',    sub: 'Tenor',   icon: '🌱', cls: 'icon-tenor'   },
+    { key: 'bass',    label: '베이스',  sub: 'Bass',    icon: '🟣', cls: 'icon-bass'    },
+  ];
+
+  // ══════════════════════════════════════════════════
+  //  State
+  // ══════════════════════════════════════════════════
+  let allWeeks = [];
+  let currentWeekId = null;
+
+  // ══════════════════════════════════════════════════
+  //  Navigation
+  // ══════════════════════════════════════════════════
+  function navigate(screen) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + screen).classList.add('active');
+    if (screen === 'view') initViewScreen();
+    if (screen === 'input') initInputScreen();
+  }
+
+  function getQueryParam(key) {
+    return new URLSearchParams(window.location.search).get(key);
+  }
+
+  function setQueryParam(key, value) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    history.replaceState(null, '', url.toString());
+  }
+
+  // ══════════════════════════════════════════════════
+  //  Data loading
+  // ══════════════════════════════════════════════════
+  async function loadWeeks() {
+    const res = await fetch(RAW_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('데이터를 불러오지 못했습니다.');
+    const data = await res.json();
+    return (data.weeks || []).sort((a, b) => a.id - b.id);
+  }
+
+  // ══════════════════════════════════════════════════
+  //  View Screen
+  // ══════════════════════════════════════════════════
+  async function initViewScreen() {
+    const content = document.getElementById('view-content');
+    const select  = document.getElementById('week-select');
+    content.innerHTML = '<p class="loading">불러오는 중...</p>';
+    select.innerHTML  = '';
+
+    try {
+      allWeeks = await loadWeeks();
+    } catch (e) {
+      content.innerHTML = `<p class="no-data">데이터를 불러오지 못했습니다.<br>${e.message}</p>`;
+      return;
+    }
+
+    if (allWeeks.length === 0) {
+      content.innerHTML = '<p class="no-data">아직 등록된 연습 영상이 없습니다.</p>';
+      select.innerHTML  = '<option>주차 없음</option>';
+      return;
+    }
+
+    // Populate dropdown
+    allWeeks.forEach(w => {
+      const opt = document.createElement('option');
+      opt.value = w.id;
+      opt.textContent = `${w.id}주차 — ${w.song}`;
+      select.appendChild(opt);
+    });
+
+    // Determine which week to show
+    const paramWeek = parseInt(getQueryParam('week'));
+    const target = allWeeks.find(w => w.id === paramWeek) || allWeeks[0];
+    select.value = target.id;
+    renderWeek(target.id);
+  }
+
+  function onWeekChange(weekId) {
+    renderWeek(parseInt(weekId));
+  }
+
+  function renderWeek(weekId) {
+    currentWeekId = weekId;
+    setQueryParam('week', weekId);
+
+    const week = allWeeks.find(w => w.id === weekId);
+    if (!week) return;
+
+    const cards = PARTS
+      .filter(p => week.links && week.links[p.key])
+      .map(p => `
+        <a class="link-card" href="${escHtml(week.links[p.key])}" target="_blank" rel="noopener">
+          <div class="link-icon ${p.cls}">${p.icon}</div>
+          <div class="link-info">
+            <div class="link-part">${p.label}</div>
+            <div class="link-sub">${p.sub}</div>
+          </div>
+          <div class="link-arrow">›</div>
+        </a>
+      `).join('');
+
+    const html = `
+      <p class="song-name">🎵 ${escHtml(week.song)}</p>
+      <div class="links-grid">${cards || '<p class="no-data">링크가 없습니다.</p>'}</div>
+    `;
+    document.getElementById('view-content').innerHTML = html;
+  }
+
+  function copyShareUrl() {
+    const url = PAGES_BASE + '?week=' + currentWeekId;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = '✅ 복사 완료!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '🔗 이 페이지 링크 복사';
+        btn.classList.remove('copied');
+      }, 2500);
+    }).catch(() => {
+      alert('복사 실패. 직접 URL을 복사해 주세요:\n' + url);
+    });
+  }
+
+  // ══════════════════════════════════════════════════
+  //  Input Screen — PAT
+  // ══════════════════════════════════════════════════
+  function initInputScreen() {
+    const pat = localStorage.getItem('choir_pat');
+    const input  = document.getElementById('pat-input');
+    const status = document.getElementById('pat-status');
+    if (pat) {
+      input.value = pat;
+      status.textContent = '✓ PAT이 저장되어 있습니다.';
+      status.className = 'pat-status ok';
+    } else {
+      status.textContent = 'PAT을 입력하고 저장하세요.';
+      status.className = 'pat-status';
+    }
+  }
+
+  function savePat() {
+    const val = document.getElementById('pat-input').value.trim();
+    const status = document.getElementById('pat-status');
+    if (!val) { status.textContent = 'PAT을 입력해 주세요.'; return; }
+    localStorage.setItem('choir_pat', val);
+    status.textContent = '✓ 저장되었습니다.';
+    status.className = 'pat-status ok';
+  }
+
+  // ══════════════════════════════════════════════════
+  //  Input Screen — Save
+  // ══════════════════════════════════════════════════
+  async function handleSave() {
+    const pat    = localStorage.getItem('choir_pat');
+    const weekNo = parseInt(document.getElementById('input-week').value);
+    const song   = document.getElementById('input-song').value.trim();
+    const links  = {
+      choir:   document.getElementById('link-choir').value.trim(),
+      soprano: document.getElementById('link-soprano').value.trim(),
+      alto:    document.getElementById('link-alto').value.trim(),
+      tenor:   document.getElementById('link-tenor').value.trim(),
+      bass:    document.getElementById('link-bass').value.trim(),
+    };
+
+    const btn    = document.getElementById('save-btn');
+    const status = document.getElementById('save-status');
+
+    // Validation
+    if (!pat) { setStatus(status, 'error', 'GitHub PAT을 먼저 저장해 주세요.'); return; }
+    if (!weekNo || weekNo < 1) { setStatus(status, 'error', '주차 번호를 입력해 주세요.'); return; }
+    if (!song) { setStatus(status, 'error', '곡 이름을 입력해 주세요.'); return; }
+    if (!Object.values(links).some(v => v)) { setStatus(status, 'error', '링크를 하나 이상 입력해 주세요.'); return; }
+
+    btn.disabled = true;
+    setStatus(status, '', '저장 중...');
+
+    try {
+      await saveWeeks(pat, weekNo, song, links);
+      setStatus(status, 'success', `✓ ${weekNo}주차 데이터가 저장되었습니다!`);
+      clearInputForm();
+    } catch (e) {
+      setStatus(status, 'error', '저장 실패: ' + e.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function saveWeeks(pat, weekNo, song, links) {
+    // Step 1: get current file (for SHA)
+    const headers = {
+      'Authorization': 'Bearer ' + pat,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    };
+
+    let sha = null;
+    let existingWeeks = [];
+
+    const getRes = await fetch(API_URL, { headers });
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+      const decoded = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+      existingWeeks = JSON.parse(decoded).weeks || [];
+    } else if (getRes.status !== 404) {
+      const err = await getRes.json();
+      throw new Error(err.message || getRes.statusText);
+    }
+
+    // Upsert
+    const idx = existingWeeks.findIndex(w => w.id === weekNo);
+    const entry = { id: weekNo, song, links };
+    if (idx >= 0) existingWeeks[idx] = entry;
+    else existingWeeks.push(entry);
+    existingWeeks.sort((a, b) => a.id - b.id);
+
+    // Step 2: PUT
+    const json    = JSON.stringify({ weeks: existingWeeks }, null, 2);
+    const content = btoa(unescape(encodeURIComponent(json)));
+
+    const body = {
+      message: `Update week ${weekNo} — ${song}`,
+      content,
+      ...(sha ? { sha } : {}),
+    };
+
+    const putRes = await fetch(API_URL, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!putRes.ok) {
+      const err = await putRes.json();
+      throw new Error(err.message || putRes.statusText);
+    }
+  }
+
+  function clearInputForm() {
+    ['input-week','input-song','link-choir','link-soprano','link-alto','link-tenor','link-bass']
+      .forEach(id => { document.getElementById(id).value = ''; });
+  }
+
+  function setStatus(el, type, msg) {
+    el.textContent = msg;
+    el.className = 'status-msg' + (type ? ' ' + type : '');
+  }
+
+  function escHtml(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ══════════════════════════════════════════════════
+  //  Bootstrap
+  // ══════════════════════════════════════════════════
+  (function init() {
+    const weekParam = getQueryParam('week');
+    if (weekParam) {
+      navigate('view');
+    } else {
+      navigate('main');
+    }
+  })();
+</script>
+</body>
+</html>
