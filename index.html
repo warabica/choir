@@ -377,6 +377,44 @@
       font-size: 15px;
     }
 
+    /* ── Visit Counter ── */
+    .visit-counter {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: #e8f0fe;
+      border-radius: 10px;
+      padding: 5px 10px;
+      flex-shrink: 0;
+    }
+    .counter-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 38px;
+    }
+    .counter-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #7a9cc8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+    .counter-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: #1a3a6b;
+      line-height: 1.3;
+    }
+    .counter-sep {
+      width: 1px;
+      height: 28px;
+      background: #b8cee8;
+      margin: 0 8px;
+    }
+
     .scroll-content { flex: 1; overflow-y: auto; }
   </style>
 </head>
@@ -472,6 +510,17 @@
   <div class="header">
     <button class="back-btn" onclick="navigate('main')">←</button>
     <h1>연습 영상</h1>
+    <div class="visit-counter" id="visit-counter" style="display:none;">
+      <div class="counter-col">
+        <span class="counter-label">Today</span>
+        <span class="counter-value" id="count-today">–</span>
+      </div>
+      <div class="counter-sep"></div>
+      <div class="counter-col">
+        <span class="counter-label">Total</span>
+        <span class="counter-value" id="count-total">–</span>
+      </div>
+    </div>
   </div>
 
   <div class="week-select-wrap">
@@ -496,7 +545,8 @@
   const RAW_URL    = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${DATA_PATH}`;
   const API_URL    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`;
   const PAGES_BASE = `https://${REPO_OWNER}.github.io/${REPO_NAME}/`;
-  const YT_SEARCH  = 'https://www.googleapis.com/youtube/v3/search';
+  const YT_SEARCH   = 'https://www.googleapis.com/youtube/v3/search';
+  const COUNTER_NS  = 'warabica-choir';
 
   const PARTS = [
     { key: 'choir',   label: '합창',    sub: 'Choir',   icon: '🎼', cls: 'icon-choir'   },
@@ -586,6 +636,8 @@
     const week = allWeeks.find(w => w.id === weekId);
     if (!week) return;
 
+    updateCounter(weekId);   // 접속 카운터 업데이트
+
     const cards = PARTS
       .filter(p => week.links && week.links[p.key])
       .map(p => `
@@ -603,6 +655,59 @@
       <p class="song-name">🎵 ${escHtml(week.song)}</p>
       <div class="links-grid">${cards || '<p class="no-data">링크가 없습니다.</p>'}</div>
     `;
+  }
+
+  // ══════════════════════════════════════════════════
+  //  Visit Counter  (countapi.xyz — 무료, 인증 불필요)
+  //  주차별 Today / Total 접속 횟수를 추적합니다.
+  //  같은 세션에서 같은 주차를 다시 볼 때는 증가시키지 않습니다.
+  // ══════════════════════════════════════════════════
+  async function updateCounter(weekId) {
+    const badge = document.getElementById('visit-counter');
+    const elToday = document.getElementById('count-today');
+    const elTotal = document.getElementById('count-total');
+
+    // 로딩 상태로 배지 표시
+    elToday.textContent = '…';
+    elTotal.textContent = '…';
+    badge.style.display = 'flex';
+
+    // 오늘 날짜 키 (YYYYMMDD)
+    const d = new Date();
+    const dateKey = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+
+    const keyTotal = `w${weekId}`;
+    const keyToday = `w${weekId}-${dateKey}`;
+    const sessionFlag = `cv-${weekId}`;   // 이번 세션에서 이미 카운트했는지
+
+    try {
+      let vTotal, vToday;
+
+      if (!sessionStorage.getItem(sessionFlag)) {
+        // 첫 방문 → hit (증가 + 반환)
+        const [rTotal, rToday] = await Promise.all([
+          fetch(`https://api.countapi.xyz/hit/${COUNTER_NS}/${keyTotal}`),
+          fetch(`https://api.countapi.xyz/hit/${COUNTER_NS}/${keyToday}`),
+        ]);
+        vTotal = (await rTotal.json()).value ?? 0;
+        vToday = (await rToday.json()).value ?? 0;
+        sessionStorage.setItem(sessionFlag, '1');
+      } else {
+        // 재방문 → get (증가 없이 조회)
+        const [rTotal, rToday] = await Promise.all([
+          fetch(`https://api.countapi.xyz/get/${COUNTER_NS}/${keyTotal}`),
+          fetch(`https://api.countapi.xyz/get/${COUNTER_NS}/${keyToday}`),
+        ]);
+        vTotal = (await rTotal.json()).value ?? 0;
+        vToday = (await rToday.json()).value ?? 0;
+      }
+
+      elToday.textContent = vToday;
+      elTotal.textContent = vTotal;
+    } catch {
+      // CountAPI 오류 시 배지 숨김 (앱 동작에는 영향 없음)
+      badge.style.display = 'none';
+    }
   }
 
   function copyShareUrl() {
