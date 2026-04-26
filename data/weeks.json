@@ -43,6 +43,17 @@
         "tenor": "https://www.youtube.com/watch?v=CmeRUoRlmAM",
         "bass": "https://www.youtube.com/watch?v=O03dTIE5M5A"
       }
+    },
+    {
+      "id": 20,
+      "song": "찬양하리 (유빌라테 35)",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=J040OYzPPic",
+        "soprano": "https://www.youtube.com/watch?v=Ne1EI7CRaOs",
+        "alto": "https://www.youtube.com/watch?v=BtSKheFlUp8",
+        "tenor": "https://www.youtube.com/watch?v=a3dcXZY9blk",
+        "bass": "https://www.youtube.com/watch?v=8SrnGvw9pk0"
+      }
     }
   ]
 }
