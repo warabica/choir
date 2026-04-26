@@ -41,6 +41,24 @@
       gap: 16px;
       position: relative;
     }
+    .church-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .church-badge img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    .church-badge span {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a3a6b;
+    }
     .choir-name-badge {
       position: absolute;
       top: 0;
@@ -450,6 +468,10 @@
 
 <!-- ════════════════════════════════ MAIN SCREEN ════════════════════════════════ -->
 <section id="screen-main" class="screen">
+  <div class="church-badge">
+    <img src="data/church.png" alt="청운교회" />
+    <span>청운교회</span>
+  </div>
   <div class="choir-name-badge">늘감사 성가대</div>
   <p class="main-title">✝ 성가대 연습 영상</p>
   <p class="main-subtitle">주차별 파트 연습 영상 링크 모음</p>
