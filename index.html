@@ -602,6 +602,10 @@
   const PAGES_BASE = `https://${REPO_OWNER}.github.io/${REPO_NAME}/`;
   const YT_SEARCH   = 'https://www.googleapis.com/youtube/v3/search';
 
+  const CHOIR_DATA_PATH = 'data/choir-videos.json';
+  const CHOIR_RAW_URL   = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${CHOIR_DATA_PATH}`;
+  const CHOIR_API_URL   = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CHOIR_DATA_PATH}`;
+
   const PARTS = [
     { key: 'choir',   label: '합창',    sub: 'Choir',   icon: '🎼', cls: 'icon-choir'   },
     { key: 'soprano', label: '소프라노', sub: 'Soprano', icon: '🌸', cls: 'icon-soprano' },
@@ -717,36 +721,35 @@
     const container = document.getElementById('choir-video-list');
     container.innerHTML = '<p class="loading">영상을 불러오는 중...</p>';
 
-    const apiKey = localStorage.getItem('choir_yt_key');
-    if (!apiKey) {
-      container.innerHTML = `
-        <p class="no-data" style="margin-top:40px;">
-          YouTube API Key가 설정되지 않았습니다.<br>
-          관리자 화면에서 API Key를 먼저 저장해 주세요.
-        </p>`;
-      return;
-    }
-
     try {
-      const q   = encodeURIComponent('청운교회 늘감사 성가대');
-      const url = `${YT_SEARCH}?part=snippet&q=${q}&type=video&maxResults=5&order=date&key=${apiKey}`;
-      const res  = await fetch(url);
-      const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
-
-      const items = data.items || [];
-      if (items.length === 0) {
-        container.innerHTML = '<p class="no-data" style="margin-top:40px;">검색 결과가 없습니다.</p>';
+      const res = await fetch(`${CHOIR_RAW_URL}?t=${Date.now()}`);
+      if (!res.ok) {
+        container.innerHTML = `
+          <p class="no-data" style="margin-top:40px;">
+            아직 등록된 영상이 없습니다.<br>
+            관리자가 저장 시 자동 업데이트됩니다.
+          </p>`;
         return;
       }
 
-      container.innerHTML = `<div class="choir-video-list">${items.map(item => {
-        const vid   = item.id.videoId;
-        const title = escHtml(item.snippet.title);
-        const ch    = escHtml(item.snippet.channelTitle);
-        const date  = new Date(item.snippet.publishedAt).toLocaleDateString('ko-KR');
-        const thumb = `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
-        const ytUrl = `https://www.youtube.com/watch?v=${vid}`;
+      const data   = await res.json();
+      const videos = data.videos || [];
+
+      if (videos.length === 0) {
+        container.innerHTML = `
+          <p class="no-data" style="margin-top:40px;">
+            아직 등록된 영상이 없습니다.<br>
+            관리자가 저장 시 자동 업데이트됩니다.
+          </p>`;
+        return;
+      }
+
+      container.innerHTML = `<div class="choir-video-list">${videos.map(v => {
+        const title = escHtml(v.title);
+        const ch    = escHtml(v.channelTitle);
+        const date  = new Date(v.publishedAt).toLocaleDateString('ko-KR');
+        const thumb = `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`;
+        const ytUrl = `https://www.youtube.com/watch?v=${v.videoId}`;
         return `
           <div class="choir-video-card">
             <img class="choir-video-thumb" src="${thumb}" alt="${title}" loading="lazy" />
@@ -966,7 +969,20 @@
 
     try {
       await saveWeeks(pat, weekNo, song, links);
-      setStatus(status, 'success', `✓ ${weekNo}주차 데이터가 저장되었습니다!`);
+
+      const apiKey = localStorage.getItem('choir_yt_key');
+      if (apiKey) {
+        setStatus(status, '', `✓ ${weekNo}주차 저장 완료 · 늘감사 영상 업데이트 중...`);
+        try {
+          await saveChoirVideos(pat, apiKey);
+          setStatus(status, 'success', `✓ ${weekNo}주차 저장 완료 + 늘감사 영상 업데이트됨`);
+        } catch (e2) {
+          setStatus(status, 'success', `✓ ${weekNo}주차 저장 완료 (늘감사 영상 업데이트 실패: ${e2.message})`);
+        }
+      } else {
+        setStatus(status, 'success', `✓ ${weekNo}주차 저장 완료 (YouTube Key 없음 — 늘감사 영상 미업데이트)`);
+      }
+
       clearInputForm();
     } catch (e) {
       setStatus(status, 'error', '저장 실패: ' + e.message);
@@ -1009,6 +1025,50 @@
       method: 'PUT',
       headers: { ...headers, 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: `Update week ${weekNo} — ${song}`, content, ...(sha ? { sha } : {}) }),
+    });
+
+    if (!putRes.ok) {
+      const err = await putRes.json();
+      throw new Error(err.message || putRes.statusText);
+    }
+  }
+
+  async function saveChoirVideos(pat, apiKey) {
+    const q   = encodeURIComponent('청운교회 늘감사 성가대');
+    const url = `${YT_SEARCH}?part=snippet&q=${q}&type=video&maxResults=5&order=date&key=${apiKey}`;
+    const ytRes  = await fetch(url);
+    const ytData = await ytRes.json();
+    if (ytData.error) throw new Error(ytData.error.message);
+
+    const videos = (ytData.items || []).map(item => ({
+      videoId:      item.id.videoId,
+      title:        item.snippet.title,
+      channelTitle: item.snippet.channelTitle,
+      publishedAt:  item.snippet.publishedAt,
+    }));
+
+    const headers = {
+      'Authorization': 'Bearer ' + pat,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    };
+
+    let sha = null;
+    const getRes = await fetch(CHOIR_API_URL, { headers });
+    if (getRes.ok) {
+      sha = (await getRes.json()).sha;
+    } else if (getRes.status !== 404) {
+      const err = await getRes.json();
+      throw new Error(err.message || getRes.statusText);
+    }
+
+    const json    = JSON.stringify({ updatedAt: new Date().toISOString(), videos }, null, 2);
+    const content = btoa(unescape(encodeURIComponent(json)));
+
+    const putRes = await fetch(CHOIR_API_URL, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update choir-videos.json', content, ...(sha ? { sha } : {}) }),
     });
 
     if (!putRes.ok) {
