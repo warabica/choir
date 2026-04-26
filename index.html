@@ -686,9 +686,8 @@
       return;
     }
 
-    // 검색은 최초 한 번만 수행
     btn.disabled = true;
-    btn.textContent = '🔍 검색 완료';
+    btn.textContent = '⏳ 검색 중...';
 
     // 로딩 표시
     area.style.display = 'block';
@@ -705,6 +704,9 @@
     );
 
     renderSearchResults(results);
+
+    btn.disabled = false;
+    btn.textContent = '🔍 다시 검색';
   }
 
   async function fetchPartVideos(song, partLabel, apiKey) {
