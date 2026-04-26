@@ -377,6 +377,15 @@
       font-size: 15px;
     }
 
+    .performance-section { margin-top: 24px; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #b36200;
+      margin-bottom: 8px;
+    }
+    .performance-card { border-left: 4px solid #ffb300; }
+
     .scroll-content { flex: 1; overflow-y: auto; }
   </style>
 </head>
@@ -460,6 +469,13 @@
     <div class="form-group">
       <label>🟣 베이스 (Bass)</label>
       <input type="url" id="link-bass" placeholder="https://youtube.com/..." />
+    </div>
+
+    <!-- ⑤ 지난 주 늘감사 영상 -->
+    <div class="section-title">지난 주 늘감사 영상</div>
+    <div class="form-group">
+      <label>🎭 공연 영상 링크</label>
+      <input type="url" id="link-performance" placeholder="https://youtube.com/..." />
     </div>
 
     <button class="save-btn" id="save-btn" onclick="handleSave()">저장하기</button>
@@ -600,9 +616,23 @@
         </a>
       `).join('');
 
+    const performanceCard = week.performanceUrl ? `
+      <div class="performance-section">
+        <div class="section-label">🎭 지난 주 늘감사 영상</div>
+        <a class="link-card performance-card" href="${escHtml(week.performanceUrl)}" target="_blank" rel="noopener">
+          <div class="link-icon" style="background:#fff3e0;">🎭</div>
+          <div class="link-info">
+            <div class="link-part">늘감사 성가대 공연</div>
+            <div class="link-sub">지난 주 영상 보기</div>
+          </div>
+          <div class="link-arrow">›</div>
+        </a>
+      </div>` : '';
+
     document.getElementById('view-content').innerHTML = `
       <p class="song-name">🎵 ${escHtml(week.song)}</p>
       <div class="links-grid">${cards || '<p class="no-data">링크가 없습니다.</p>'}</div>
+      ${performanceCard}
     `;
   }
 
@@ -796,6 +826,7 @@
       tenor:   document.getElementById('link-tenor').value.trim(),
       bass:    document.getElementById('link-bass').value.trim(),
     };
+    const performanceUrl = document.getElementById('link-performance').value.trim();
 
     const btn    = document.getElementById('save-btn');
     const status = document.getElementById('save-status');
@@ -809,7 +840,7 @@
     setStatus(status, '', '저장 중...');
 
     try {
-      await saveWeeks(pat, weekNo, song, links);
+      await saveWeeks(pat, weekNo, song, links, performanceUrl);
       setStatus(status, 'success', `✓ ${weekNo}주차 데이터가 저장되었습니다!`);
       clearInputForm();
     } catch (e) {
@@ -819,7 +850,7 @@
     }
   }
 
-  async function saveWeeks(pat, weekNo, song, links) {
+  async function saveWeeks(pat, weekNo, song, links, performanceUrl) {
     const headers = {
       'Authorization': 'Bearer ' + pat,
       'Accept': 'application/vnd.github+json',
@@ -841,7 +872,7 @@
     }
 
     const idx = existingWeeks.findIndex(w => w.id === weekNo);
-    const entry = { id: weekNo, song, links };
+    const entry = { id: weekNo, song, links, ...(performanceUrl ? { performanceUrl } : {}) };
     if (idx >= 0) existingWeeks[idx] = entry;
     else existingWeeks.push(entry);
     existingWeeks.sort((a, b) => a.id - b.id);
@@ -862,7 +893,7 @@
   }
 
   function clearInputForm() {
-    ['input-week','input-song','link-choir','link-soprano','link-alto','link-tenor','link-bass']
+    ['input-week','input-song','link-choir','link-soprano','link-alto','link-tenor','link-bass','link-performance']
       .forEach(id => { document.getElementById(id).value = ''; });
 
     // 검색 결과 초기화 및 검색 버튼 재활성화
