@@ -39,6 +39,18 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
+      position: relative;
+    }
+    .choir-name-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a3a6b;
+      background: #e8f0fe;
+      border-radius: 8px;
+      padding: 5px 10px;
     }
     .main-title {
       font-size: 26px;
@@ -393,6 +405,7 @@
 
 <!-- ════════════════════════════════ MAIN SCREEN ════════════════════════════════ -->
 <section id="screen-main" class="screen">
+  <div class="choir-name-badge">늘감사 성가대</div>
   <p class="main-title">✝ 성가대 연습 영상</p>
   <p class="main-subtitle">주차별 파트 연습 영상 링크 모음</p>
   <button class="main-btn main-btn-secondary" onclick="navigate('view')">🎵 연습 영상 보기</button>
