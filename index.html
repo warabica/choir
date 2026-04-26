@@ -546,7 +546,8 @@
   const API_URL    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`;
   const PAGES_BASE = `https://${REPO_OWNER}.github.io/${REPO_NAME}/`;
   const YT_SEARCH   = 'https://www.googleapis.com/youtube/v3/search';
-  const COUNTER_NS  = 'warabica-choir';
+  const COUNTER_NS   = 'warabica-choir';
+  const COUNTER_BASE = 'https://api.counterapi.dev/v1';
 
   const PARTS = [
     { key: 'choir',   label: '합창',    sub: 'Choir',   icon: '🎼', cls: 'icon-choir'   },
@@ -658,55 +659,56 @@
   }
 
   // ══════════════════════════════════════════════════
-  //  Visit Counter  (countapi.xyz — 무료, 인증 불필요)
+  //  Visit Counter  (counterapi.dev — 무료, 인증 불필요)
   //  주차별 Today / Total 접속 횟수를 추적합니다.
   //  같은 세션에서 같은 주차를 다시 볼 때는 증가시키지 않습니다.
   // ══════════════════════════════════════════════════
   async function updateCounter(weekId) {
-    const badge = document.getElementById('visit-counter');
+    const badge   = document.getElementById('visit-counter');
     const elToday = document.getElementById('count-today');
     const elTotal = document.getElementById('count-total');
 
-    // 로딩 상태로 배지 표시
+    // 배지를 항상 표시 (로딩 중)
+    badge.style.display = 'flex';
     elToday.textContent = '…';
     elTotal.textContent = '…';
-    badge.style.display = 'flex';
 
     // 오늘 날짜 키 (YYYYMMDD)
     const d = new Date();
     const dateKey = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
 
-    const keyTotal = `w${weekId}`;
-    const keyToday = `w${weekId}-${dateKey}`;
+    const keyTotal    = `w${weekId}`;
+    const keyToday    = `w${weekId}-${dateKey}`;
     const sessionFlag = `cv-${weekId}`;   // 이번 세션에서 이미 카운트했는지
 
     try {
       let vTotal, vToday;
 
       if (!sessionStorage.getItem(sessionFlag)) {
-        // 첫 방문 → hit (증가 + 반환)
+        // 첫 방문 → /up (증가 + 반환)
         const [rTotal, rToday] = await Promise.all([
-          fetch(`https://api.countapi.xyz/hit/${COUNTER_NS}/${keyTotal}`),
-          fetch(`https://api.countapi.xyz/hit/${COUNTER_NS}/${keyToday}`),
+          fetch(`${COUNTER_BASE}/${COUNTER_NS}/${keyTotal}/up`),
+          fetch(`${COUNTER_BASE}/${COUNTER_NS}/${keyToday}/up`),
         ]);
-        vTotal = (await rTotal.json()).value ?? 0;
-        vToday = (await rToday.json()).value ?? 0;
+        vTotal = (await rTotal.json()).count ?? 0;
+        vToday = (await rToday.json()).count ?? 0;
         sessionStorage.setItem(sessionFlag, '1');
       } else {
-        // 재방문 → get (증가 없이 조회)
+        // 재방문 → 증가 없이 조회
         const [rTotal, rToday] = await Promise.all([
-          fetch(`https://api.countapi.xyz/get/${COUNTER_NS}/${keyTotal}`),
-          fetch(`https://api.countapi.xyz/get/${COUNTER_NS}/${keyToday}`),
+          fetch(`${COUNTER_BASE}/${COUNTER_NS}/${keyTotal}`),
+          fetch(`${COUNTER_BASE}/${COUNTER_NS}/${keyToday}`),
         ]);
-        vTotal = (await rTotal.json()).value ?? 0;
-        vToday = (await rToday.json()).value ?? 0;
+        vTotal = (await rTotal.json()).count ?? 0;
+        vToday = (await rToday.json()).count ?? 0;
       }
 
       elToday.textContent = vToday;
       elTotal.textContent = vTotal;
     } catch {
-      // CountAPI 오류 시 배지 숨김 (앱 동작에는 영향 없음)
-      badge.style.display = 'none';
+      // API 오류 시 배지는 유지하되 '–' 표시
+      elToday.textContent = '–';
+      elTotal.textContent = '–';
     }
   }
 
