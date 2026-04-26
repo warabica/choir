@@ -645,9 +645,15 @@
   //  Data loading
   // ══════════════════════════════════════════════════
   async function loadWeeks() {
-    const res = await fetch(RAW_URL + '?t=' + Date.now());
+    // GitHub Contents API를 사용해 CDN 캐시 우회 (raw URL은 최대 5분 캐싱)
+    const res = await fetch(API_URL, {
+      headers: { 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store',
+    });
     if (!res.ok) throw new Error('데이터를 불러오지 못했습니다.');
-    const data = await res.json();
+    const fileData = await res.json();
+    const decoded = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+    const data = JSON.parse(decoded);
     return (data.weeks || []).sort((a, b) => a.id - b.id);
   }
 
