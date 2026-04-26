@@ -21,6 +21,28 @@
         "tenor": "https://youtu.be/Rw6pOsFcOfI?si=KTJoH-fh26_J9puo",
         "bass": "https://youtu.be/eCUbGJOhM5U?si=K3f7uZ7zBi8_EMlK"
       }
+    },
+    {
+      "id": 18,
+      "song": "예수께서 오실때에",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=Gg8ZGPD5aXM",
+        "soprano": "https://www.youtube.com/watch?v=6OVWxHAA_Ko",
+        "alto": "https://www.youtube.com/watch?v=SEDpfbl_HLI",
+        "tenor": "https://www.youtube.com/watch?v=5Unan4RHUGc",
+        "bass": "https://www.youtube.com/watch?v=B6ePiZu_nIs"
+      }
+    },
+    {
+      "id": 19,
+      "song": "와이즈성가 약속있는 첫계명",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=4cdWYeX_xSo",
+        "soprano": "https://www.youtube.com/watch?v=sS7_rrGGy4M",
+        "alto": "https://www.youtube.com/watch?v=mFssspR6ctM",
+        "tenor": "https://www.youtube.com/watch?v=CmeRUoRlmAM",
+        "bass": "https://www.youtube.com/watch?v=O03dTIE5M5A"
+      }
     }
   ]
 }
