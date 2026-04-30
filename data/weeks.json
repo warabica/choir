@@ -54,6 +54,17 @@
         "tenor": "https://www.youtube.com/watch?v=fKZ7Apkxqn8",
         "bass": "https://www.youtube.com/watch?v=GOzj46jv7LE"
       }
+    },
+    {
+      "id": 21,
+      "song": "아침해가 돋을 때 - 낱피스",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=QZDy-75HOoI",
+        "soprano": "https://www.youtube.com/watch?v=LIhEwIjyBx4",
+        "alto": "https://www.youtube.com/watch?v=o8SA7k6wAgc",
+        "tenor": "https://www.youtube.com/watch?v=0t2zRzotX1Q",
+        "bass": "https://www.youtube.com/watch?v=OIKRAVaSmxQ"
+      }
     }
   ]
 }
