@@ -1,0 +1,81 @@
+name: 늘감사 성가대 영상 자동 업데이트
+
+on:
+  schedule:
+    - cron: '0 8 * * 4'   # 매주 목요일 17:00 KST (= 08:00 UTC)
+  workflow_dispatch:        # GitHub 웹에서 수동 실행도 가능
+
+permissions:
+  contents: write           # choir-videos.json 커밋/푸시 권한
+
+jobs:
+  update-choir-videos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: YouTube 검색 후 choir-videos.json 업데이트
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          python3 - <<'EOF'
+          import json, urllib.request, urllib.parse, datetime, os, sys
+
+          api_key = os.environ.get('YOUTUBE_API_KEY', '')
+          if not api_key:
+              print('❌ YOUTUBE_API_KEY 시크릿이 설정되지 않았습니다.')
+              sys.exit(1)
+
+          q   = urllib.parse.quote('청운교회 늘감사 성가대')
+          url = (
+              'https://www.googleapis.com/youtube/v3/search'
+              f'?part=snippet&q={q}&type=video&maxResults=5&order=date&key={api_key}'
+          )
+
+          try:
+              with urllib.request.urlopen(url) as res:
+                  data = json.loads(res.read())
+          except Exception as e:
+              print(f'❌ YouTube API 호출 실패: {e}')
+              sys.exit(1)
+
+          if 'error' in data:
+              print(f'❌ YouTube API 오류: {data["error"]["message"]}')
+              sys.exit(1)
+
+          videos = [
+              {
+                  'videoId':      item['id']['videoId'],
+                  'title':        item['snippet']['title'],
+                  'channelTitle': item['snippet']['channelTitle'],
+                  'publishedAt':  item['snippet']['publishedAt'],
+              }
+              for item in data.get('items', [])
+          ]
+
+          output = {
+              'updatedAt': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.000Z'),
+              'videos': videos,
+          }
+
+          with open('data/choir-videos.json', 'w', encoding='utf-8') as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print(f'✅ 저장 완료: {len(videos)}개 영상')
+          for v in videos:
+              print(f'  - {v["title"]} ({v["channelTitle"]})')
+          EOF
+
+      - name: 변경 사항 커밋 및 푸시
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/choir-videos.json
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: 늘감사 성가대 영상 자동 업데이트 ($(date -u '+%Y-%m-%d'))"
+            git push
+          fi
