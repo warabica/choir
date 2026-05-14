@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-05-07T10:28:08.000Z",
+  "updatedAt": "2026-05-14T10:22:27.000Z",
   "videos": [
+    {
+      "videoId": "VGgRNectzZk",
+      "title": "[약속있는 첫 계명] 늘감사찬양대 - 청운교회 주일예배 20260510",
+      "channelTitle": "chungwoon church",
+      "publishedAt": "2026-05-12T08:22:48Z"
+    },
     {
       "videoId": "lBMt8F7VYpA",
       "title": "[예수께서 오실 때에] 늘감사찬양대 - 청운교회 주일예배 20260503",
@@ -24,12 +30,6 @@
       "title": "[하나님의 은혜로] 늘감사찬양대 - 청운교회 주일예배 20260412",
       "channelTitle": "chungwoon church",
       "publishedAt": "2026-04-14T09:23:42Z"
-    },
-    {
-      "videoId": "ax5mQQGxR7A",
-      "title": "[부활의 주님] 늘감사찬양대 - 청운교회 주일예배 20260405",
-      "channelTitle": "chungwoon church",
-      "publishedAt": "2026-04-07T08:43:25Z"
     }
   ]
 }
