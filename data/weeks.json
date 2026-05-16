@@ -65,6 +65,17 @@
         "tenor": "https://www.youtube.com/watch?v=v5cu7A9AkDE",
         "bass": "https://www.youtube.com/watch?v=eXTvoOyoGio"
       }
+    },
+    {
+      "id": 22,
+      "song": "우리가 사랑함은 유빌라테 37",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=pLzexdKsOsk",
+        "soprano": "https://www.youtube.com/watch?v=u_JOS_So2Es",
+        "alto": "https://www.youtube.com/watch?v=GKEhN-__sGQ",
+        "tenor": "https://youtu.be/TatjWIOgNNE?si=umtQd9Hac3wzIIlP",
+        "bass": "https://www.youtube.com/watch?v=4v1BTWErW9w"
+      }
     }
   ]
 }
