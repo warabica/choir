@@ -56,6 +56,17 @@
       }
     },
     {
+      "id": 21,
+      "song": "우리 주의 성령이 유빌라테 37",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=jYtwIZDBZI4",
+        "soprano": "https://www.youtube.com/watch?v=2QZJjt33PJ0",
+        "alto": "https://www.youtube.com/watch?v=W6F4Ucp2LNs",
+        "tenor": "https://www.youtube.com/watch?v=jYtwIZDBZI4",
+        "bass": "https://www.youtube.com/watch?v=GOzj46jv7LE"
+      }
+    },
+    {
       "id": 22,
       "song": "새 노래로 여호와를 찬양해 와이즈성가2",
       "links": {
