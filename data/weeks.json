@@ -87,6 +87,17 @@
         "tenor": "https://youtu.be/TatjWIOgNNE?si=umtQd9Hac3wzIIlP",
         "bass": "https://www.youtube.com/watch?v=4v1BTWErW9w"
       }
+    },
+    {
+      "id": 24,
+      "song": "내 영혼에 햇빛비치니 빛나라성가합창23",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=YjKA1JYT8Us",
+        "soprano": "https://www.youtube.com/watch?v=YjKA1JYT8Us",
+        "alto": "https://www.youtube.com/watch?v=NxR911HOzDE",
+        "tenor": "https://www.youtube.com/watch?v=V17EqSUFt10",
+        "bass": "https://www.youtube.com/watch?v=-YLIMPeC3dA"
+      }
     }
   ]
 }
