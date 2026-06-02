@@ -98,6 +98,17 @@
         "tenor": "https://www.youtube.com/watch?v=V17EqSUFt10",
         "bass": "https://www.youtube.com/watch?v=-YLIMPeC3dA"
       }
+    },
+    {
+      "id": 25,
+      "song": "확실한 소망 - 빛나라 성가합창23",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=SXDjL46QcWQ",
+        "soprano": "https://www.youtube.com/watch?v=SXDjL46QcWQ",
+        "alto": "https://www.youtube.com/watch?v=2uKXPeXe9s0",
+        "tenor": "https://www.youtube.com/watch?v=jZayRT-P510",
+        "bass": "https://www.youtube.com/watch?v=HzT7uQ3ad9A"
+      }
     }
   ]
 }
