@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-06-18T11:52:29.000Z",
+  "updatedAt": "2026-06-25T10:45:51.000Z",
   "videos": [
+    {
+      "videoId": "EzG7Es9QIiI",
+      "title": "[내 영혼에 햇빛비치니] 늘감사찬양대 - 청운교회 주일예배 20260621",
+      "channelTitle": "chungwoon church",
+      "publishedAt": "2026-06-23T06:31:12Z"
+    },
     {
       "videoId": "IbERNFbjknc",
       "title": "[나 찬양하리라] 늘감사찬양대 - 청운교회 주일예배 20260614",
@@ -24,12 +30,6 @@
       "title": "[우리 주의 성령이] 늘감사찬양대 - 청운교회 주일예배 20260524",
       "channelTitle": "chungwoon church",
       "publishedAt": "2026-05-26T06:00:03Z"
-    },
-    {
-      "videoId": "xkWzuZdw-M0",
-      "title": "[찬양하리] 늘감사찬양대 - 청운교회 주일예배 20260517",
-      "channelTitle": "chungwoon church",
-      "publishedAt": "2026-05-19T08:02:20Z"
     }
   ]
 }
