@@ -131,6 +131,17 @@
         "tenor": "https://www.youtube.com/watch?v=evvIjEKS1jk",
         "bass": "https://www.youtube.com/watch?v=2fPh8sapOZk"
       }
+    },
+    {
+      "id": 28,
+      "song": "해 뜨는데 부터(이근호) 와이즈성가2.",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=8jApTVu5Fqk",
+        "soprano": "https://www.youtube.com/watch?v=2Bn6FhPMTRA",
+        "alto": "https://www.youtube.com/watch?v=eDd9sJHXYQ0",
+        "tenor": "https://www.youtube.com/watch?v=zmq004vIC6E",
+        "bass": "https://www.youtube.com/watch?v=XMYhP86Oz84"
+      }
     }
   ]
 }
