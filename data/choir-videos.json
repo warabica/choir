@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-07-04T22:44:04.960Z",
+  "updatedAt": "2026-07-09T11:02:19.000Z",
   "videos": [
+    {
+      "videoId": "EjyYcsNyH5s",
+      "title": "[주께 가오니] 늘감사찬양대 - 청운교회 주일예배 20260705",
+      "channelTitle": "chungwoon church",
+      "publishedAt": "2026-07-07T07:46:45Z"
+    },
     {
       "videoId": "1jiYnECQedQ",
       "title": "[확실한 소망] 늘감사찬양대 - 청운교회 주일예배 20260628",
@@ -24,12 +30,6 @@
       "title": "[우리가 사랑함은] 늘감사찬양대 - 청운교회 주일예배 20260607",
       "channelTitle": "chungwoon church",
       "publishedAt": "2026-06-09T08:16:42Z"
-    },
-    {
-      "videoId": "2y5l31iVzIU",
-      "title": "[새 노래로 여호와를 찬양해] 늘감사찬양대 - 청운교회 주일예배 20260531",
-      "channelTitle": "chungwoon church",
-      "publishedAt": "2026-06-02T07:31:16Z"
     }
   ]
 }
