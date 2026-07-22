@@ -186,6 +186,17 @@
         "tenor": "https://www.youtube.com/watch?v=kJZ8dsxb3G4",
         "bass": "https://www.youtube.com/watch?v=MAa8_XWi0I4"
       }
+    },
+    {
+      "id": 33,
+      "song": "주 없이 살 수 없네(이근호) 와이즈성가2",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=HZ86wB9vIro",
+        "soprano": "https://www.youtube.com/watch?v=HZ86wB9vIro",
+        "alto": "https://www.youtube.com/watch?v=lQjDo-SrmxA",
+        "tenor": "https://www.youtube.com/watch?v=ILQuvJtssw0",
+        "bass": "https://www.youtube.com/watch?v=v616zsW1Ixg"
+      }
     }
   ]
 }
