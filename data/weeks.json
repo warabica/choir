@@ -197,6 +197,17 @@
         "tenor": "https://www.youtube.com/watch?v=ILQuvJtssw0",
         "bass": "https://www.youtube.com/watch?v=v616zsW1Ixg"
       }
+    },
+    {
+      "id": 34,
+      "song": "찬양 14 네 등불 밝혀라 (와이즈성가2집)",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=SqxCoRQFzjE",
+        "soprano": "https://www.youtube.com/watch?v=QtIeAIg3MSE",
+        "alto": "https://www.youtube.com/watch?v=dTkRE7ofKGQ",
+        "tenor": "https://www.youtube.com/watch?v=Y_7c9owF_lE",
+        "bass": "https://www.youtube.com/watch?v=VD-MdtWEj6M"
+      }
     }
   ]
 }
