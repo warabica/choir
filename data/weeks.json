@@ -164,6 +164,17 @@
         "tenor": "https://www.youtube.com/watch?v=qJyDNCN7ZGk",
         "bass": "https://www.youtube.com/watch?v=b3AmUoqzSSE"
       }
+    },
+    {
+      "id": 31,
+      "song": "이 세상 험하고(이근호) 와이즈성가2",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=GupVdGdgZz0",
+        "soprano": "https://www.youtube.com/watch?v=PHdrl9XP1yI",
+        "alto": "https://www.youtube.com/watch?v=BeTklxcYa90",
+        "tenor": "https://www.youtube.com/watch?v=PYlpf-GcExQ",
+        "bass": "https://www.youtube.com/watch?v=y97ByLSPabA"
+      }
     }
   ]
 }
