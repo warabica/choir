@@ -175,6 +175,17 @@
         "tenor": "https://www.youtube.com/watch?v=PYlpf-GcExQ",
         "bass": "https://www.youtube.com/watch?v=y97ByLSPabA"
       }
+    },
+    {
+      "id": 32,
+      "song": "믿음의 반석 위에(이승훈) 유빌라떼40",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=gvVGabVz8TY",
+        "soprano": "https://www.youtube.com/watch?v=45BRDVh09iw",
+        "alto": "https://www.youtube.com/watch?v=_7yiZnJo4ek",
+        "tenor": "https://www.youtube.com/watch?v=kJZ8dsxb3G4",
+        "bass": "https://www.youtube.com/watch?v=MAa8_XWi0I4"
+      }
     }
   ]
 }
