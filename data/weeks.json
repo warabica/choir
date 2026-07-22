@@ -208,6 +208,17 @@
         "tenor": "https://www.youtube.com/watch?v=Y_7c9owF_lE",
         "bass": "https://www.youtube.com/watch?v=VD-MdtWEj6M"
       }
+    },
+    {
+      "id": 35,
+      "song": "찬양 26 주님의 귀한 어린 양 (와이즈성가2집)",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=1vxZ9xTdNqg",
+        "soprano": "https://www.youtube.com/watch?v=WPyH9hT6glA",
+        "alto": "https://www.youtube.com/watch?v=gp1gP-DsU6A",
+        "tenor": "https://www.youtube.com/watch?v=laasaL92NLU",
+        "bass": "https://www.youtube.com/watch?v=4xmgbodON7Y"
+      }
     }
   ]
 }
