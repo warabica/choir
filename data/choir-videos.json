@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-08-06T10:42:05.000Z",
+  "updatedAt": "2026-08-13T09:15:02.000Z",
   "videos": [
+    {
+      "videoId": "hGyfdhHj_8c",
+      "title": "[믿음의 반석 위에] 늘감사찬양대 - 청운교회 주일예배 20260809",
+      "channelTitle": "청운교회 Chungwoon Church",
+      "publishedAt": "2026-08-11T01:21:48Z"
+    },
     {
       "videoId": "eDGNyWkolpQ",
       "title": "[이 세상 험하고] 늘감사찬양대 - 청운교회 주일예배 20260802",
@@ -24,12 +30,6 @@
       "title": "해 뜨는 데부터 | 늘감사찬양대 · 청운교회 주일예배 (2026.07.12)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-07-14T11:06:10Z"
-    },
-    {
-      "videoId": "EjyYcsNyH5s",
-      "title": "주께 가오니 | 늘감사찬양대 · 청운교회 주일예배 (2026.07.05)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-07-07T07:46:45Z"
     }
   ]
 }
