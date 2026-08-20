@@ -1,15 +1,21 @@
 {
-  "updatedAt": "2026-08-13T09:15:02.000Z",
+  "updatedAt": "2026-08-20T08:41:12.000Z",
   "videos": [
     {
+      "videoId": "IOznkJPvp_s",
+      "title": "주 없이 살 수 없네 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.16)",
+      "channelTitle": "청운교회 Chungwoon Church",
+      "publishedAt": "2026-08-18T22:59:27Z"
+    },
+    {
       "videoId": "hGyfdhHj_8c",
-      "title": "[믿음의 반석 위에] 늘감사찬양대 - 청운교회 주일예배 20260809",
+      "title": "믿음의 반석 위에 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.09)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-08-11T01:21:48Z"
     },
     {
       "videoId": "eDGNyWkolpQ",
-      "title": "[이 세상 험하고] 늘감사찬양대 - 청운교회 주일예배 20260802",
+      "title": "이 세상 험하고 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.02)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-08-04T10:04:24Z"
     },
@@ -24,12 +30,6 @@
       "title": "나의 도움이 어디서 오나 | 늘감사찬양대 · 청운교회 주일예배 (2026.07.19)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-07-21T10:07:35Z"
-    },
-    {
-      "videoId": "9tU_rWkgcfw",
-      "title": "해 뜨는 데부터 | 늘감사찬양대 · 청운교회 주일예배 (2026.07.12)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-07-14T11:06:10Z"
     }
   ]
 }
