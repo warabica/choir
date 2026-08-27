@@ -230,6 +230,17 @@
         "tenor": "https://www.youtube.com/watch?v=3WPv3glcizE",
         "bass": "https://youtu.be/8x4Bfy8-kB8?si=K6bmGZEYlhTvTb_8"
       }
+    },
+    {
+      "id": 37,
+      "song": "정결하게 하는 샘이(이근호) 와이즈성가2",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=1XejJjHbiZU",
+        "soprano": "https://www.youtube.com/watch?v=1XejJjHbiZU",
+        "alto": "https://www.youtube.com/watch?v=nWkNUO_F47Y",
+        "tenor": "https://www.youtube.com/watch?v=iir2AhNWttw",
+        "bass": "https://www.youtube.com/watch?v=xlvjFBTjjaA"
+      }
     }
   ]
 }
