@@ -241,6 +241,17 @@
         "tenor": "https://www.youtube.com/watch?v=iir2AhNWttw",
         "bass": "https://www.youtube.com/watch?v=xlvjFBTjjaA"
       }
+    },
+    {
+      "id": 38,
+      "song": "새롭게 하시네(이근호) 와이즈성가2",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=oRbY6sJk-0M",
+        "soprano": "https://youtu.be/RPzNjWKtq9k?si=b9nzD-yTp4U39ghb",
+        "alto": "https://www.youtube.com/watch?v=npWIErCuZig",
+        "tenor": "https://www.youtube.com/watch?v=ou0w2lHmzUI",
+        "bass": "https://www.youtube.com/watch?v=xlvjFBTjjaA"
+      }
     }
   ]
 }
