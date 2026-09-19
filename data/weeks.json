@@ -274,6 +274,17 @@
         "tenor": "https://youtu.be/9fob1q60GKU?t=680&si=VeU-gbBbOxTlikbJ",
         "bass": "https://youtu.be/9fob1q60GKU?t=905&si=Gpnt9XOlH4pJMb6J"
       }
+    },
+    {
+      "id": 41,
+      "song": "고요한 바다로 (와이즈성가6집)",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=0GvrWx1Nj3s",
+        "soprano": "https://www.youtube.com/watch?v=JTU4Fh-TXXU",
+        "alto": "https://www.youtube.com/watch?v=TCCtRQC0NsI",
+        "tenor": "https://www.youtube.com/watch?v=AYcVp5o4804",
+        "bass": "https://www.youtube.com/watch?v=AJJjZCdDLjo"
+      }
     }
   ]
 }
