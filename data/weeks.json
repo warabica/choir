@@ -285,6 +285,17 @@
         "tenor": "https://www.youtube.com/watch?v=_g1i2LQcB8k",
         "bass": "https://www.youtube.com/watch?v=R8o5ueLdnd8"
       }
+    },
+    {
+      "id": 42,
+      "song": "그 크신 하나님의 사랑 (와이즈성가6집)",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=nMNif_vZv74",
+        "soprano": "https://www.youtube.com/watch?v=_-_3pr41tYQ",
+        "alto": "https://www.youtube.com/watch?v=V1H2CGXi8-0",
+        "tenor": "https://www.youtube.com/watch?v=uFOlys4NwwE",
+        "bass": "https://www.youtube.com/watch?v=k7SGX3qJKfk"
+      }
     }
   ]
 }
