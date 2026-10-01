@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-09-24T13:23:07.000Z",
+  "updatedAt": "2026-10-01T15:13:23.000Z",
   "videos": [
+    {
+      "videoId": "9FUMkNq9tWg",
+      "title": "새롭게 하시네 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.20)",
+      "channelTitle": "청운교회 Chungwoon Church",
+      "publishedAt": "2026-09-22T08:15:02Z"
+    },
     {
       "videoId": "DSUMybWYQzg",
       "title": "정결하게 하는 샘이 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.13)",
@@ -24,12 +30,6 @@
       "title": "네 등불 밝혀라 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.23)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-08-26T12:32:37Z"
-    },
-    {
-      "videoId": "IOznkJPvp_s",
-      "title": "주 없이 살 수 없네 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.16)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-08-18T22:59:27Z"
     }
   ]
 }
