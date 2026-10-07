@@ -296,6 +296,17 @@
         "tenor": "https://www.youtube.com/watch?v=n7vZNEo-aYI",
         "bass": "https://www.youtube.com/watch?v=MkTnNLh5GLU"
       }
+    },
+    {
+      "id": 43,
+      "song": "넓은들에익은곡식 황선균",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=hSAzVGYqgcY",
+        "soprano": "https://www.youtube.com/watch?v=KeTj-AtYhZA",
+        "alto": "https://youtu.be/ZbYrN3gdYkw?si=dzuy2El3RO5JKQpN",
+        "tenor": "https://www.youtube.com/watch?v=lLr8HquhWQk",
+        "bass": "https://www.youtube.com/watch?v=F2wSC71t-kw"
+      }
     }
   ]
 }
