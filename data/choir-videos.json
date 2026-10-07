@@ -1,6 +1,12 @@
 {
-  "updatedAt": "2026-10-01T15:13:23.000Z",
+  "updatedAt": "2026-10-07T11:36:13.016Z",
   "videos": [
+    {
+      "videoId": "IlXe8QS1nbg",
+      "title": "선한 목자 되신 우리 주 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.27)",
+      "channelTitle": "청운교회 Chungwoon Church",
+      "publishedAt": "2026-09-29T11:12:41Z"
+    },
     {
       "videoId": "9FUMkNq9tWg",
       "title": "새롭게 하시네 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.20)",
@@ -24,12 +30,6 @@
       "title": "주님의 귀한 어린양 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.30)",
       "channelTitle": "청운교회 Chungwoon Church",
       "publishedAt": "2026-09-02T09:21:27Z"
-    },
-    {
-      "videoId": "vqlisaTaSco",
-      "title": "네 등불 밝혀라 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.23)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-08-26T12:32:37Z"
     }
   ]
 }
