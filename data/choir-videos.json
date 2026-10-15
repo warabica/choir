@@ -1,6 +1,18 @@
 {
-  "updatedAt": "2026-10-08T15:21:54.000Z",
+  "updatedAt": "2026-10-15T13:10:39.000Z",
   "videos": [
+    {
+      "videoId": "TddfR7xo0Y0",
+      "title": "그 크신 하나님의 사랑 | 늘감사찬양대 · 청운교회 주일예배 (2026.10.11)",
+      "channelTitle": "대한예수교 장로회 청운교회",
+      "publishedAt": "2026-10-13T11:54:47Z"
+    },
+    {
+      "videoId": "6rz7KWPiX24",
+      "title": "은혜 | 늘감사찬양대 · 청운교회 주일예배 (2026.10.04)",
+      "channelTitle": "대한예수교 장로회 청운교회",
+      "publishedAt": "2026-10-06T11:52:26Z"
+    },
     {
       "videoId": "IlXe8QS1nbg",
       "title": "선한 목자 되신 우리 주 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.27)",
@@ -16,20 +28,8 @@
     {
       "videoId": "DSUMybWYQzg",
       "title": "정결하게 하는 샘이 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.13)",
-      "channelTitle": "청운교회 Chungwoon Church",
+      "channelTitle": "대한예수교 장로회 청운교회",
       "publishedAt": "2026-09-15T13:40:08Z"
-    },
-    {
-      "videoId": "4-nmWbB6nm0",
-      "title": "주의 인자하심 | 늘감사찬양대 · 청운교회 주일예배 (2026.09.06)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-09-10T00:44:18Z"
-    },
-    {
-      "videoId": "sUw6SGgo7X0",
-      "title": "주님의 귀한 어린양 | 늘감사찬양대 · 청운교회 주일예배 (2026.08.30)",
-      "channelTitle": "청운교회 Chungwoon Church",
-      "publishedAt": "2026-09-02T09:21:27Z"
     }
   ]
 }
