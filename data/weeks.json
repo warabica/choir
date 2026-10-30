@@ -307,6 +307,17 @@
         "tenor": "https://www.youtube.com/watch?v=pmbT5fFaUCM",
         "bass": "https://www.youtube.com/watch?v=F2wSC71t-kw"
       }
+    },
+    {
+      "id": 44,
+      "song": "고요한 바다로(남지영) 와이즈성가6",
+      "links": {
+        "choir": "https://www.youtube.com/watch?v=g6weP9lDZ_M",
+        "soprano": "https://www.youtube.com/watch?v=JTU4Fh-TXXU",
+        "alto": "https://youtu.be/TCCtRQC0NsI?si=BCijNF7qppy2UXnm",
+        "tenor": "https://www.youtube.com/watch?v=AYcVp5o4804",
+        "bass": "https://youtu.be/AJJjZCdDLjo?si=SuLAK_huVemXd1Vg"
+      }
     }
   ]
 }
