@@ -329,6 +329,17 @@
         "tenor": "https://youtu.be/8dFCKbweT9w?si=pIl1l80NYPfUfepP",
         "bass": "https://youtu.be/drpAYNexzwA?si=re2MpFk9vjnzeErJ"
       }
+    },
+    {
+      "id": 46,
+      "song": "[유빌라떼 명품성가 19집] 17. 허락하신 새 땅에",
+      "links": {
+        "choir": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf",
+        "soprano": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf",
+        "alto": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf",
+        "tenor": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf",
+        "bass": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf"
+      }
     }
   ]
 }
