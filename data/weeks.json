@@ -340,6 +340,17 @@
         "tenor": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf",
         "bass": "https://youtu.be/Z6SAzb3NJZ0?si=YGu-hNsIQM5F7ynf"
       }
+    },
+    {
+      "id": 47,
+      "song": "어찌 그리 아름다운지요(최기욱) 유빌라떼19.",
+      "links": {
+        "choir": "https://youtu.be/1TkLDhrdoMI?si=bVysIJWymvXgc9JB",
+        "soprano": "https://youtu.be/B4VZtqzhm74?si=oOI1LhaCOdbHxqJd",
+        "alto": "https://youtu.be/a0dFdmOR59Y?si=gK3FKVP4t7WH5j6O",
+        "tenor": "https://youtu.be/9zuQpI7lK4E?si=mCgYjc76g3zaFZnx",
+        "bass": "https://youtu.be/V_2UkEgVnaI?si=xO0grFIJ_MALm5rF"
+      }
     }
   ]
 }
